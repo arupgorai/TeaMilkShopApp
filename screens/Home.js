@@ -1,37 +1,47 @@
-import React from 'react';
+import React from "react";
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet
-} from 'react-native';
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+
+import { HeaderBar } from "../components";
+import {
+  SIZES,
+  COLORS,
+  FONTS,
+  icons,
+  constants,
+  images,
+  dummyData,
+} from "../constants";
 
 const Home = ({ navigation }) => {
-    return (
-        <View style={styles.container}>
-            <Text>Home</Text>
+  return (
+    <View style={styles.container}>
+      <HeaderBar />
 
-            <TouchableOpacity
-                onPress={() => navigation.navigate("Rewards")}
-            >
-                <Text>Navigate to Rewards</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                onPress={() => navigation.navigate("Location")}
-            >
-                <Text>Navigate to Locations</Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
+      <ScrollView
+        style={{
+          flex: 1,
+          marginTop: -25,
+          borderTopLeftRadius: SIZES.radius * 2,
+          borderTopRightRadius: SIZES.radius * 2,
+          backgroundColor: COLORS.secondary,
+        }}
+      >
+        <Text>Home</Text>
+      </ScrollView>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})
+  container: {
+    flex: 1,
+  },
+});
 
 export default Home;
