@@ -123,7 +123,7 @@ const Tabs = () => {
           tabBarButton: (props) => (
             <CustomTabBarButton
               {...props}
-              containerStyle={{ borderTopLeftRadius: SIZES.radius * 5 }}
+              containerStyle={{ borderTopLeftRadius: SIZES.radius * 2.5 }}
             />
           ),
         }}
@@ -210,7 +210,7 @@ const Tabs = () => {
           tabBarButton: (props) => (
             <CustomTabBarButton
               {...props}
-              containerStyle={{ borderTopRightRadius: SIZES.radius * 5 }}
+              containerStyle={{ borderTopRightRadius: SIZES.radius * 2.5 }}
             />
           ),
         }}

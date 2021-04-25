@@ -7,10 +7,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { connect } from "react-redux";
 
 import { SIZES, COLORS, FONTS, icons } from "../constants";
+import { toggleTheme } from "../stores/themeActions";
 
-const HeaderBar = (props) => {
+const HeaderBar = ({ appTheme, toggleTheme }) => {
+  const toggleThemeHandler = () => {
+    if (appTheme.name === "light") {
+      toggleTheme("dark");
+    } else {
+      toggleTheme("light");
+    }
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -18,6 +28,7 @@ const HeaderBar = (props) => {
         width: "100%",
         backgroundColor: COLORS.purple,
         flexDirection: "row",
+        paddingTop: 15,
       }}
     >
       {/* Greeting  */}
@@ -42,6 +53,7 @@ const HeaderBar = (props) => {
           borderRadius: 20,
           backgroundColor: COLORS.lightPurple,
         }}
+        onPress={() => toggleThemeHandler()}
       >
         {/* SUN  */}
         <View
@@ -50,6 +62,7 @@ const HeaderBar = (props) => {
             width: 40,
             alignItems: "center",
             justifyContent: "center",
+            ...(appTheme.name === "light" ? styles.selectedLightModeStyle : {}),
           }}
         >
           <Image
@@ -65,6 +78,7 @@ const HeaderBar = (props) => {
             width: 40,
             alignItems: "center",
             justifyContent: "center",
+            ...(appTheme.name === "dark" ? styles.selectedNightModeStyle : {}),
           }}
         >
           <Image
@@ -73,7 +87,6 @@ const HeaderBar = (props) => {
               height: 30,
               width: 30,
               tintColor: COLORS.white,
-              ...styles.selectedNightModeStyle,
             }}
           />
         </View>
@@ -82,7 +95,16 @@ const HeaderBar = (props) => {
   );
 };
 
-export default HeaderBar;
+const mapStateToProps = (state) => ({
+  appTheme: state.appTheme,
+  error: state.error,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleTheme: (themeType) => dispatch(toggleTheme(themeType)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderBar);
 
 const styles = StyleSheet.create({
   selectedNightModeStyle: {
